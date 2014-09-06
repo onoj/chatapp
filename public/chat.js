@@ -2,7 +2,8 @@ window.onload = function() {
 
     var messages = [];
     var socket = io.connect('http://localhost:3700');
-    var field = document.getElementById("field");
+    //var field = document.getElementById("field");
+    //var field = $("#field");
     var sendButton = document.getElementById("send");
     var content = document.getElementById("content");
 
@@ -20,7 +21,8 @@ window.onload = function() {
     });
 
     sendButton.onclick = function() {
-        var text = field.value;
+        var text;
+        text = $("#field").val();
         socket.emit('send', { message: text });
     };
 
