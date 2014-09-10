@@ -2,22 +2,19 @@ window.onload = function() {
 
     var messages = [];
     var socket = io.connect('http://localhost:3700');
-    //var field = document.getElementById("field");
-    //var field = $("#field");
-    //var sendButton = document.getElementById("send");
-
 
     socket.on('message', function (data) {
-        $('#messages').append($('<li>').text(data));
-
-
+        msgstring = data['name'] +" : " + data['message'];
+        $('#messages').append($('<li>').text(msgstring));
     });
 
 
     $('#chatbox').submit(function(){
-        socket.emit('send', $('#field').val());
+        na = $('#name').val();
+        msg = $('#field').val();
+        socket.emit('send', {name : na, message : msg});
         $('#field').val('');
         return false;
     });
 
-}
+};
