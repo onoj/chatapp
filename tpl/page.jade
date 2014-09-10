@@ -5,8 +5,10 @@ html
         script(src='/jquery-1.11.1.min.js')
         script(src='/chat.js')
         script(src='/socket.io/socket.io.js')
+        link(rel='stylesheet', href='/css/style.css')
     body
-        #content(style='width: 100px;')
+        #messages
         .controls
-            input#field(style='width:350px;')
-            input#send(type='button', value='send')
+            form#chatbox
+                input#field(style='width:350px;')
+                button#send SEND

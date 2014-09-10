@@ -4,26 +4,20 @@ window.onload = function() {
     var socket = io.connect('http://localhost:3700');
     //var field = document.getElementById("field");
     //var field = $("#field");
-    var sendButton = document.getElementById("send");
-    var content = document.getElementById("content");
+    //var sendButton = document.getElementById("send");
+
 
     socket.on('message', function (data) {
-        if(data.message) {
-            messages.push(data.message);
-            var html = '';
-            for(var i=0; i<messages.length; i++) {
-                html += messages[i] + '<br />';
-            }
-            content.innerHTML = html;
-        } else {
-            console.log("There is a problem:", data);
-        }
+        $('#messages').append($('<li>').text(data));
+
+
     });
 
-    sendButton.onclick = function() {
-        var text;
-        text = $("#field").val();
-        socket.emit('send', { message: text });
-    };
+
+    $('#chatbox').submit(function(){
+        socket.emit('send', $('#field').val());
+        $('#field').val('');
+        return false;
+    });
 
 }
